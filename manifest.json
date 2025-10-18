@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "soundcloudLyricsFirefox",
+  "version": "1.0",
+
+  "description": "Provides lyrics to songs you are currently listening to.",
+
+  "icons": {
+    "48": "icons/CHANGE_ME_PLEASE.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.mozilla.org/*"],
+      "js": ["soundcloudLyricsFirefox.js"]
+    }
+  ]
+}
