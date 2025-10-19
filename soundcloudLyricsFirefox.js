@@ -5,7 +5,7 @@ function getCurrentSongDetails(){
     return [artist,songName]
 }
 
-function getLyrics(artist,songName){
+async function getLyrics(artist,songName){
     console.log(artist, songName)
     var songNameClean = songName.toLowerCase().replace(/[^a-zA-Z0-9]/g, '').split(" ")[0]
     var artistClean = artist.toLowerCase().replace(/[^a-zA-Z0-9]/, '').split(" ")[0]
@@ -27,7 +27,9 @@ function getLyrics(artist,songName){
             console.log(`Error ${xhr.status}`)
         }
     }
-
+    //let response = await fetch(url)
+    //console.log(response)
+    //let raw_text = await response.textContent
 }
 
 
