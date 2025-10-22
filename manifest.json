@@ -14,5 +14,17 @@
       "matches": ["*://*.soundcloud.com/*", "*://localhost/*"],
       "js": ["soundcloudLyricsFirefox.js"]
     }
-  ]
+  ],
+
+
+  "permissions":[
+    "webRequest",
+    "webRequestBlocking",
+    "*:/azlyrics.com/*",
+    "tabs"
+  ],
+
+  "background":{
+    "scripts":"background.js"
+  }
 }
