@@ -4,36 +4,11 @@ function getCurrentSongDetails(){
     //console.log(`${artist} ${songName}`)
     return [artist,songName]
 }
-
-async function getLyrics(artist,songName){
-    console.log(artist, songName)
-    var songNameClean = songName.toLowerCase().replace(/[^a-zA-Z0-9]/g, '').split(" ")[0]
-    var artistClean = artist.toLowerCase().replace(/[^a-zA-Z0-9]/, '').split(" ")[0]
-    console.log(songNameClean,artistClean)
-    
-
-    // fetches lyrics
-    const url = `https://www.azlyrics.com/lyrics/${artistClean}/${songNameClean}.html`
-    const xhr = new XMLHttpRequest()
-    xhr.open("GET", url)
-    xhr.responseType = "document"
-    xhr.send()
-    xhr.onload = () => {
-        if (xhr.readyState == 4 && xhr.status == 200) { // if request is successful
-            const raw_page_contents = xhr.responseText
-            console.log(raw_page_contents)
-        
-        }else{
-            console.log(`Error ${xhr.status}`)
-        }
-    }
-    //let response = await fetch(url)
-    //console.log(response)
-    //let raw_text = await response.textContent
+function fetchFromBackground(){
+   chrome.runtime.sendMessage()
 }
 
-
-window.onload = function() {
+function main(){
     console.log("test")
     var songDetails = getCurrentSongDetails()
 
@@ -43,5 +18,8 @@ window.onload = function() {
 }
 
 
+// bruh idk what the fuck ive written here but it doesnt work.
+// fix this when you can be fucked to understand the code.
+// i hate coding
+window.addEventListener("load", main)
 
-document.getElementsByTagName
