@@ -4,22 +4,50 @@ function getCurrentSongDetails(){
     //console.log(`${artist} ${songName}`)
     return [artist,songName]
 }
-function fetchFromBackground(){
-   chrome.runtime.sendMessage()
+
+
+
+function fetchFromBackground(artist, songName){
+   const sending = browser.runtime.sendMessage({
+    songName: songName,
+    artist: artist
+   })
+   sending.then(handleResponse, handleError)
 }
+function handleResponse(m){
+    console.log(`Recieved lyrics: ${m.response}`)
+}
+
+function handleError(error){
+    console.log(`Error: ${error}`)
+}
+
 
 function main(){
-    console.log("test")
-    var songDetails = getCurrentSongDetails()
+    //console.log("test")
+    //var songDetails = getCurrentSongDetails()
+//
+    //var artist = songDetails[0]
+    //var songName = songDetails[1]
+    //getLyrics(artist, songName)
+    const targetNode = document.getElementsByClassName("playbackSoundBadge__title")[0]
+    const config = {childList: true, subtree: true};
+    const callback = function (mutationList, observer) {
+        for (const mutation of mutationList){
+            if (mutation.type === 'childList'){
+                var songDetails = getCurrentSongDetails()
+                fetchFromBackground(songDetails[0], songDetails[1])
+                console.log("mutation detected")
+            }
+        }
+    }
+    const observer = new MutationObserver(callback)
+    observer.observe(targetNode, config)
 
-    var artist = songDetails[0]
-    var songName = songDetails[1]
-    getLyrics(artist, songName)
+    
+    console.log("Test")
 }
 
 
-// bruh idk what the fuck ive written here but it doesnt work.
-// fix this when you can be fucked to understand the code.
-// i hate coding
 window.addEventListener("load", main)
 

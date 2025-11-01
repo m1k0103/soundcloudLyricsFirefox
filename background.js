@@ -35,9 +35,22 @@ async function getLyrics(artist,songName){
 
         const result = await response.text()
         console.log(result)
+        return result
     //} catch (error){
         //console.error(error.message)
     //}
     console.log("test")
 
 }
+
+
+
+function handleMessage(request, sender, sendResponse) {
+  console.log(`A content script sent a message: ${request.greeting}`);
+  const artist = sender.artist
+  const songName = sender.songName
+  const result_lyrics = getLyrics(artist, songName)
+  sendResponse({ response: result_lyrics});
+}
+
+browser.runtime.onMessage.addListener(handleMessage);
