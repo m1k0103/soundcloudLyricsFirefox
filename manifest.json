@@ -17,11 +17,12 @@
   ],
 
 
-  "permissions":[
+  "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "*:/azlyrics.com/*",
-    "tabs"
+    "tabs",
+    "https://*.azlyrics.com/*",
+    "http://*.azlyrics.com/*"
   ],
 
   "background":{
